@@ -31,24 +31,29 @@ const dbUtils = {
     const [result] = await db.query('INSERT INTO ?? SET ?', [table, data]);
     return result.insertId;
   },
-
-  /** Update row by ID */
-  update: async (table, id, data) => {
-    const [result] = await db.query('UPDATE ?? SET ? WHERE id = ?', [table, data, id]);
-    return result.affectedRows;
-  },
+  update: async (table, field, value, data) => {
+    const sql = `UPDATE ?? SET ? WHERE ?? = ?`;
+    const [result] = await db.query(sql, [table, data, field, value]);
+    return result.affectedRows > 0 ? value : null; 
+  }, 
 
   /** Delete row by ID */
-  remove: async (table, id) => {
-    const [result] = await db.query('DELETE FROM ?? WHERE id = ?', [table, id]);
+  remove: async (table,field, value) => {
+    const sql = `DELECTE FROM ?? WHERE ?? = ?`;
+    const [result] = await db.query(sql, [table, field, value]);
     return result.affectedRows;
   },
 
   /** Bulk delete rows by array of IDs */
-  deleteBulk: async (table, ids) => {
-    const [result] = await db.query('DELETE FROM ?? WHERE id IN (?)', [table, ids]);
+  deleteBulk: async (table, field, values) => {
+    const sql = `DELETE FROM ?? WHERE ?? IN (?)`;
+    const [result] = await db.query(sql, [table, field, values]);
     return result.affectedRows;
   },
+  // deleteBulk: async (table, ids) => {
+  //   const [result] = await db.query('DELETE FROM ?? WHERE id IN (?)', [table, ids]);
+  //   return result.affectedRows;
+  // },
 
   /** Count all rows in table */
   count: async (table) => {
@@ -65,7 +70,13 @@ const dbUtils = {
   getByPhone: async (table, mobile) => {
     const [results] = await db.query('SELECT * FROM ?? WHERE mobile = ?', [table, mobile]);
     return results[0];
-  }
+  },
+  //  Get user row by any field
+  getByField: async (table, field, value) => {
+    const sql = `SELECT * FROM ?? WHERE ?? = ? LIMIT 1`;
+    const [results] = await db.query(sql, [table, field, value]);
+    return results[0] || null;
+  },
 };
 
 module.exports = dbUtils;
