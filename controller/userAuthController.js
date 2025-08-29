@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
             SECRET,
             { expiresIn: '10h' }
         );
-        res.status(200).json({ success: true, token });
+        res.status(200).json({ success: true, message:"You have successfully login", userId: user.id, token });
     } catch (err) {
         res.status(500).json({ success: false, message: 'Internal server error', error: err.message });
     }
@@ -56,7 +56,7 @@ exports.register = async (req, res) => {
             SECRET,
             { expiresIn: '10h' }
         );  
-        res.status(201).json({ success: true, message: 'User registered successfully', token });
+        res.status(201).json({ success: true, message: 'User registered successfully', userId, token });
     }
     catch (err) {
         res.status(500).json({ success: false, message: 'Internal server error', error: err.message });
