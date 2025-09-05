@@ -25,6 +25,7 @@
     "@coreui/icons-react": "^2.3.0",
     "@coreui/react": "^5.7.1",
     "@coreui/react-chartjs": "^3.0.0",
+    "@coreui/react-pro": "^5.21.0",
     "@coreui/utils": "^2.0.2",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.8.2",
@@ -37,6 +38,7 @@
     "react-dom": "^19.1.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.7.1",
+    "react-toastify": "^11.0.5",
     "redux": "5.0.1",
     "simplebar-react": "^3.3.2"
   },
