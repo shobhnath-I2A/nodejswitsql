@@ -92,9 +92,7 @@ exports.getblogCategories = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || LIMIT;
         const offset = (page - 1) * limit;
-        console.log(limit, page, offset);
         const categories = await blogCategoryModel.getAll('categories', limit, offset);
-        console.log(categories);
         res.status(200).json({success: true, message: 'Blog categories fetched successfully', data: categories });
 
     } catch (error) {
