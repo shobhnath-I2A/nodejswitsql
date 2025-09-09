@@ -133,7 +133,7 @@ exports.deleteBlogCategory = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 }
-
+// this is for getting total count of blog categoriess
 exports.getBlogCategoryCount = async (req, res) => {
     try {
         const count = await blogCategoryModel.count('categories');
